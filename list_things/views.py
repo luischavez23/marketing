@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from marketing_django.forms import RegisterForm
 
 def index(request):
     return render(request, 'list_things/index.html', {
@@ -12,5 +13,19 @@ def index(request):
         ]
     })
 
-def login(request):
-    return render(request, 'users/login.html',{})
+def login_view(request):
+    form = RegisterForm( request.POST or None)
+
+    if request.method == 'POST' and form.is_valid():
+        username = form.cleaned_data.get('username')
+        password = form.cleaned_data.get('password')
+        email = form.cleaned_data.get('email')
+
+        print(username)
+        print(password)
+        print(email)
+        
+    return render(request, 'users/login.html', {'form':form})
+
+def signup_view(request):
+    return render(request, 'users/signup.html', {})

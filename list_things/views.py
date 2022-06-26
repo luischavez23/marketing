@@ -1,4 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+from django.contrib.auth import login
+from django.contrib import messages
+from django.contrib.auth.models import User
 from marketing_django.forms import RegisterForm
 
 def index(request):
@@ -14,18 +17,16 @@ def index(request):
     })
 
 def login_view(request):
-    form = RegisterForm( request.POST or None)
-
-    if request.method == 'POST' and form.is_valid():
-        username = form.cleaned_data.get('username')
-        password = form.cleaned_data.get('password')
-        email = form.cleaned_data.get('email')
-
-        print(username)
-        print(password)
-        print(email)
-        
-    return render(request, 'users/login.html', {'form':form})
+    return render(request, 'users/login.html', {})
 
 def signup_view(request):
-    return render(request, 'users/signup.html', {})
+    form = RegisterForm(request.POST or None)
+
+    if request.method == 'POST' and form.is_valid():
+        user = form.save()
+        if user:
+            login(request, user)
+            messages.success(request, 'User created satisfactory')
+            return redirect('index')
+
+    return render(request, 'users/signup.html', {'form': form})

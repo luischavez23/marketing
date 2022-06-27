@@ -9,7 +9,7 @@ class RegisterForm(forms.Form):
                                 }))
     email = forms.EmailField(required=True, widget=forms.EmailInput(attrs={'class':'form-control mb-3', 'id':'email'}))
     password = forms.CharField(required=True, widget=forms.PasswordInput(attrs={'class': 'form-control mb-3', 'id':'password'}))
-    confirm = forms.CharField(required=True, widget=forms.PasswordInput(attrs={'label':'Confirm password','class': 'form-control mb-3', 'id':'confirm'}))
+    confirm = forms.CharField(label="Confirm password",required=True, widget=forms.PasswordInput(attrs={'label':'Confirm password','class': 'form-control mb-3', 'id':'confirm'}))
 
     def clean_username(self):
         username = self.cleaned_data.get('username')

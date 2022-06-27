@@ -1,0 +1,27 @@
+{% url 'login' as login %}
+{% url 'signup' as signup %}
+
+<nav class="navbar navbar-expand-lg bg-light shadow mb-3">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'index' %}">Marketing</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'logout' %}"><span class="fa-solid fa-right-from-bracket"></span> Logout</a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link {% if request.path == login %}active{% endif %}" href="{{login}}"><span class="fa-solid fa-user"></span> Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {% if request.path == signup %}active{% endif %}" href="{{signup}}"><span class="fa-solid fa-user-plus"></span> Sign Up</a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+</nav>

@@ -1,5 +1,6 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth import login
+from django.contrib.auth import logout
 from django.contrib import messages
 from django.contrib.auth.models import User
 from marketing_django.forms import RegisterForm
@@ -18,6 +19,11 @@ def index(request):
 
 def login_view(request):
     return render(request, 'users/login.html', {})
+
+def logout_view(request):
+    logout(request)
+    messages.success(request, 'You have been successfully logged out')
+    return redirect('login')
 
 def signup_view(request):
     form = RegisterForm(request.POST or None)

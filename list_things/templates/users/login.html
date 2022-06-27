@@ -3,20 +3,16 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col-md-4 offset-md-4">
-            <form method="post" class="shadow bg-light p-4 mt-5 rounded">
-                <h2 class="fw-bold text-center">Login</h2>
-                {% csrf_token %}
-                <div class="form-group mt-3">
-                    
-                </div>
-                <div class="d-grid col-6 mx-auto">
-                    <button type="submit" class="btn btn-primary btn-lg mt-3 rounded-pill">Sign up</button>
-                </div>
-            </form>
+<div class="col-md-4 offset-md-4">
+    <form method="post" class="shadow bg-light p-4 mt-5 rounded">
+        <h2 class="fw-bold text-center">Login</h2>
+        {% csrf_token %}
+        <div class="form-group mt-3">
+            
         </div>
-    </div>
+        <div class="d-grid col-6 mx-auto">
+            <button type="submit" class="btn btn-primary btn-lg mt-3 rounded-pill">Sign up</button>
+        </div>
+    </form>
 </div>
 {% endblock %}
